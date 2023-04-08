@@ -45,7 +45,10 @@
 		margin: 0;
 		text-align: center;
 	}
-
+     
+     header > .flex-column{
+        width: 100px;
+     }
 
 	.flex-column{
 		display:flex;
@@ -58,30 +61,32 @@
     }
 
 
-   section {
-       width: 100%;
-       justify-content: center;
-    }
+
+   
   
     section > p { 
        background-color: var(--beach);
-       border: 5px solid black;
-       width: 200px ;
-       height: 200px;
-       margin-left: calc(50% - 100px);
+       border: 4px solid black;
+       margin: 10px calc(45% - 102px);
+       width: 200px;
+       height: 200px ;
        border-radius: 50% !important;
        overflow: hidden;
+       transition: box-shadow .4s;
        justify-content: center !important;
     }
+    
+       section > p:hover { 
+       box-shadow: 0 0 8px white;
+    }
+
     section > p > span {
-       font-size: 80px !important;
+       font-size: 60px !important;
     }
     section > p > button {
         padding: 5px !important;
         width: inherit; !important;
     }
-
-
 /**********MAIN***********/
             main {
             	top: 100px;
@@ -130,8 +135,8 @@ footer {
 	justify-content: space-between;
 	border: 2px solid black;
 	width: 100vw;
-	position: fixed;
-	bottom: 0;
+	/*position: fixed;
+	bottom: 0;*/
 }
 footer > div:nth-child(2) {
     position: relative;
