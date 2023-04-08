@@ -1,3 +1,4 @@
+
 //generate questions array for testing
  
    
@@ -24,7 +25,7 @@
     const audioStart       =  new Audio('start.mp3');
     const audioNext        =  new Audio('next.mp3');
     const audioCongrats    =  new Audio('congrats.mp3');
-    const audioAgain    =  new Audio('again.mp3');
+    const audioAgain       =  new Audio('again.mp3');
     var clickNextQuestionPermitted = true;
 
     const $footer = $('footer'),$main = $('main');
@@ -140,7 +141,7 @@ function putter(){
        }else{
              $main.hide(400, function(){
              const sum = userResult.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
-             $main.html(`<section><p class="flex-column"><span>${sum}/10</span><button onclick="sendData(event)">Enregistrer</button></p><br></section>`);
+             $main.html(`<section ><p class="flex-column animate__animated animate__zoomInRight"><span>${sum}/10</span><button onclick="sendData(event)">Enregistrer</button></p><br></section>`);
 
              $('header > div:nth-child(3)').css('opacity','0');
             
@@ -192,6 +193,14 @@ function () {
     } else {
         $footer.css('position','relative');
     }
+    let footerPosition = $('footer').offset().top;
+
+  // make the footer fixed to its position
+  $('footer').css({
+    'position': 'fixed',
+    'bottom': 0,
+    'top': footerPosition + 'px'
+  });
   }
   );
 
