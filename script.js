@@ -182,14 +182,15 @@ $(document).ready(function showDate(){
 
 
 //footer over main problem
-$(window).resize(
+$(document).ready(
 function () {
-    let statement = $main.position().top + $main.height() + 10 > $footer.position().top;
+
+    let statement = $(window).height() > $('body').height();
     if (statement) {
-        $footer.css('position','relative');
-    } else {
         $footer.css('position','fixed');
         $footer.css('bottom','0');
+    } else {
+        $footer.css('position','relative');
     }
   }
   );
