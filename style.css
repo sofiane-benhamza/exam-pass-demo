@@ -1,0 +1,296 @@
+	@media screen {
+
+   :root {
+   /*  --bg      : #d8d6d4;       /*rgb(   216, 214, 212 )*/
+   /*  --deep    : #1f877d;       /*rgb(    31, 135, 125 )*/
+   /*  --beach   : #23b2a7;       /*rgb(    35, 178, 167 )*/
+   /*  --fire    : #e05e20;       /*rgb(   224,  94, 32  )*/
+   /*  --deeper  : #105a52;       /*rgb(    16,  90, 82  )*/
+  
+
+     --bg      : #1A2E43;       /*rgb(   216, 214, 212 )*/
+     --beach   : #0096FF;       /*rgb(    35, 178, 167 )*/
+     --fire    : yellow;       /*rgb(   224,  94, 32  )*/
+     --correct : #33CC33;
+     --wrong   : #FF3300;
+  }
+
+	body{
+		width:100vw;
+        margin: 0;
+		background-color: var(--bg);
+		font-family: 'Genos', sans-serif;
+		overflow-x: hidden;
+		user-select: none;
+       -webkit-user-select: none;
+       -moz-user-select: none;
+	}
+
+	header{
+		width: 100vw;
+		height: 70px;
+		background :var(--beach);
+		border-bottom: 2px solid black;
+		font-weight: bold;
+		display: flex;
+		justify-content: space-between;
+	}
+
+	header > *{
+		margin: 0 10px;
+		font-size: 20px;
+	}
+
+	header  p{
+		margin: 0;
+		text-align: center;
+	}
+
+
+	.flex-column{
+		display:flex;
+		flex-direction: column;
+		justify-content: space-around;
+	}
+
+    .flex-column > p:nth-child(1){
+        font-size: 1.3em;
+    }
+
+
+   section {
+       width: 100%;
+       justify-content: center;
+    }
+  
+    section > p { 
+       background-color: var(--beach);
+       border: 5px solid black;
+       width: 200px ;
+       height: 200px;
+       margin-left: calc(50% - 100px);
+       border-radius: 50% !important;
+       overflow: hidden;
+       justify-content: center !important;
+    }
+    section > p > span {
+       font-size: 80px !important;
+    }
+    section > p > button {
+        padding: 5px !important;
+        width: inherit; !important;
+    }
+
+
+/**********MAIN***********/
+            main {
+            	top: 100px;
+            	display: block;
+            	width: 100vw;
+            	text-align: center;
+            	font-size: 20px;
+            	font-weight: bold;
+            	width: calc(100vw - 60px);
+            	margin: auto 30px;
+            }
+           main p{
+           	  background :var(--beach);
+           		border: 1px solid black;
+           		padding: 30px;
+           		border-radius: 10px;
+           	}
+          	main > div{
+           		 display: flex;
+                 flex-direction: column;
+             	 gap:20px;
+
+           	}
+           	main div div{
+           	  background :var(--beach);
+           		padding: 10px ;
+           		border: 1px solid black;
+           		border-radius: 10px;
+                transition: opacity .4s;
+           	}
+           	main div div:hover{
+           		animation: vibrate .2s infinite;
+           		color: white;
+           		text-shadow: 0 0 9px black;
+           		cursor: pointer;
+           		font-weight: bold;
+           		box-shadow: 0px 0px 5px white, 0px 0px 5px white;
+           	}
+         
+/**********FOOTER**************/
+footer {
+	background: var(--beach);
+	display: flex;
+	font-size: 20px;
+	font-weight: bolder;
+	justify-content: space-between;
+	border: 2px solid black;
+	width: 100vw;
+	position: fixed;
+	bottom: 0;
+}
+footer > div:nth-child(2) {
+    position: relative;
+    margin-right: 10px;
+    display:flex;
+    flex-direction: column;
+    justify-content: flex-end;
+ }
+
+footer > div > i{
+margin: 10px;
+}
+footer > div {
+    margin: 0px 0;
+    padding: 0;
+}
+footer > div > p{
+	margin: 0;
+	text-align: center;
+}
+
+#team-name{
+	text-decoration:none;
+	color: var(--fire);
+	text-shadow: 0 0 5px black;
+}
+
+#before-exam-info{
+	text-align: left;
+	margin: 20px;
+	background-color: var(--beach);
+	border-radius:10px; 
+	border: 1px solid black;
+	padding: 30px;
+}
+
+
+button{
+    padding: 20px;
+    border-radius: 10px;
+    font-size: 16px;
+    border:none;
+    font-weight: bold;
+    transition: color .5s , background-color .5s;
+    cursor: pointer;
+    border-radius: 15px;
+}
+
+button:hover{
+    background-color: #0096FF;
+    color: #FFFFFF;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.5);
+}
+      
+      
+
+    @keyframes vibrate{
+        0%{transform: rotateZ(0deg);}
+      25%{transform: rotateZ(0.2deg);}
+      50%{transform: rotateZ(0deg);}
+      75%{transform: rotateZ(-0.2deg);}
+     100%{transform: rotateZ(0deg);}  
+    }
+
+    @keyframes correct{
+  0%   {transform: translateY(0);}
+  33%  { transform: translateY(-10px); }
+  66%  { transform: translateY(10px); }
+  100% { transform: translateY(0); }
+}
+
+
+   @keyframes succes{
+    0%     { background-color: var(--correct);}
+   50%     { background-color: var(--beach); }
+  100%     { background-color: var(--correct); }
+}
+ 
+   @keyframes wrong{
+  0%   { transform: translateX(0);}
+  20%  { transform: translateX(-10px); }
+  40%  { transform: translateX(10px); }
+  60%  { transform: translateX(-10px); }
+  80%  { transform: translateX(10px); }
+  100% { transform: translateX(0); }
+}
+
+   @keyframes look-at-me{
+  0%   { color:black;}
+  50%  { color:red; }
+  100%   { color:black;}
+  }
+
+   @keyframes fail{
+    0%   { background-color:var(--beach);}
+   50%   { background-color:red;}
+  100%   { background-color:var(--beach);}
+  }
+
+
+
+@media(max-width: 768px){
+	
+}
+
+@media(min-width: 768px) and (max-width: 1200px){
+
+}
+
+@media(min-width: 1200px){
+
+}
+/***********Progress Bar***********/
+.progress {
+    width: 90vw;
+    margin: 10px 5vw;
+    height: 20px;
+    border-radius: 20px;
+    border: 2px solid black;
+    background-color: gray;
+     overflow: hidden;
+     }
+  #progress-bar{
+    width: 0;
+    height: 100%;
+    border-radius: 20px;
+    border-right: 2px solid black;
+    background-color: var(--beach);
+    transition: width .5s ;
+    text-align: right;
+    overflow: hidden;
+    padding: 0;
+  }
+  #progress-number {
+    display: block;
+  	font-size: 25px !important;
+  	padding: 0px 10px;
+    transform: translateY(-6px);
+  }
+
+  /********Scroll Bar********************/
+   /* width */
+   ::-webkit-scrollbar {
+     width: 5px;
+   }
+   
+   /* Track */
+   ::-webkit-scrollbar-track {
+     background: var(--bg);
+   }
+   
+   /* Handle */
+   ::-webkit-scrollbar-thumb {
+     background: var(--beach);
+   }
+   
+   /* Handle on hover */
+   ::-webkit-scrollbar-thumb:hover {
+     background: var(--fire);
+   }
+   }
+}
