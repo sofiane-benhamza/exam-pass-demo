@@ -1,4 +1,3 @@
-
 //generate questions array for testing
  
    
@@ -120,7 +119,7 @@ function putter(){
               updateExecuted = true;
  
 	           clearInterval(auto_counter);
-    	if(q<10){ 
+    	if(q<1){ 
                 $main.hide(500);
               //define countdown time
  	           sec.text((questions[q][5]-1) > 9 ? (questions[q][5]):'0'+(questions[q][5]).toString());
@@ -139,16 +138,14 @@ function putter(){
              //activate countdown
 	           auto_counter = setInterval(counter,1000);                  
        }else{
-             $main.hide(400, function(){
              const sum = userResult.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
-             $main.html(`<section ><p class="flex-column animate__animated animate__zoomInRight"><span>${sum}/10</span><button onclick="sendData(event)">Enregistrer</button></p><br></section>`);
+             $('main').html(`<section ><p class="flex-column animate__animated animate__zoomInRight"><span>${85}/10</span><button onclick="sendData()">Enregistrer</button></p><br></section>`);
+             $('header > div:nth-child(3)').css('opacity','0');       //hide counter
 
-             $('header > div:nth-child(3)').css('opacity','0');
-            
+             $('section > p').addClass('animate__animated animate__zoomInRight');
              sum > 5 ? audioCongrats.play() && $('main section p').css('animation', 'succes 1s infinite') : 
-                       audioAgain.play() && $('section > p > button').text('try again') && $('main section p').css('animation', 'fail 1s infinite');
-             $main.show(500);
-             });
+                       audioAgain.play()    && $('section > p > button').text('try again') && $('main section p').css('animation', 'fail 1s infinite');
+             
        }
        $main.show(500);
 
@@ -183,27 +180,26 @@ $(document).ready(function showDate(){
 
 
 //footer over main problem
-$(document).ready(
-function () {
+$(document).ready(updateFooter);
+$(window).resize(updateFooter);
 
+function  updateFooter(){
+     console.log('window : '+$(window).height());
+     console.log('footer : '+($footer.position().top+$footer.height()));
+     console.log('----------------------------');
     let statement = $(window).height() > $('body').height();
     if (statement) {
-        $footer.css('position','fixed');
-        $footer.css('bottom','0');
-    } else {
         $footer.css('position','relative');
+        $('body').css('overflow-y','visible')
+    } else {
+        $footer.css('position','absolute');
+        $footer.css('bottom','0');
+        $('body').css('overflow-y','hidden')
+
     }
-    let footerPosition = $('footer').offset().top;
 
   // make the footer fixed to its position
-  $('footer').css({
-    'position': 'fixed',
-    'bottom': 0,
-    'top': footerPosition + 'px'
-  });
   }
-  );
-
 //progress bar updater
 function update(){
        progress.width(parseInt(progressNumber.text())+10+'%');
@@ -211,10 +207,12 @@ function update(){
   }
 
 //send data to server
-function sendData(event) {
-    if(event.target.innerText == 'try again'){
-        location.reload();
-    }
+function sendData() {
+  $button = $('body > main > section > p > button');
+    if($button.text() == 'try again'){
+        $button.text('attendez ...');
+      setTimeout(function() {location.reload();}, 3000);
+    }else{
   console.log('ok sending ...');
    /*var xhr = new XMLHttpRequest();
    xhr.open("POST", "save_result.php", true);
@@ -232,6 +230,7 @@ function sendData(event) {
 
    const data = "id="+userId+"&subject="+subject+"&date="+passTime+"&note="+sum;
    xhr.send(data);*/
-   $('body > main > section > p > button').text('shared succesfully');
+   $button.text('shared succesfully');
+   }
    };
 
