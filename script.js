@@ -119,7 +119,7 @@ function putter(){
               updateExecuted = true;
  
 	           clearInterval(auto_counter);
-    	if(q<1){ 
+    	if(q<10){ 
                 $main.hide(500);
               //define countdown time
  	           sec.text((questions[q][5]-1) > 9 ? (questions[q][5]):'0'+(questions[q][5]).toString());
@@ -139,18 +139,37 @@ function putter(){
 	           auto_counter = setInterval(counter,1000);                  
        }else{
              const sum = userResult.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
-             $('main').html(`<section ><p class="flex-column animate__animated animate__zoomInRight"><span>${85}/10</span><button onclick="sendData()">Enregistrer</button></p><br></section>`);
+             $('main').html(`<br><br><section ><p class="flex-column "><span id="sum">${sum}/10</span><button onclick="sendData()">Enregistrer</button></p><br></section>`);
              $('header > div:nth-child(3)').css('opacity','0');       //hide counter
-
-             $('section > p').addClass('animate__animated animate__zoomInRight');
-             sum > 5 ? audioCongrats.play() && $('main section p').css('animation', 'succes 1s infinite') : 
-                       audioAgain.play()    && $('section > p > button').text('try again') && $('main section p').css('animation', 'fail 1s infinite');
-             
-       }
+             sum > 5 ? $(':root').css('--result-color','var(--correct)') : $(':root').css('--result-color','var(--wrong)') ;
+             animateResult(sum);
+             setTimeout(function(){
+             sum > 5 ?     audioCongrats.play() && $('main section p').css('animation', 'succes 1s infinite, lightening 1s infinite')  :   //or
+                            audioAgain.play()    && $('section > p > button').text('try again') && $('main section p').css('animation', 'fail 1s infinite, lightening 1s infinite');
+             },sum*250 + 500);
+              $('section.progress').text("");
+              $('section.progress').addClass("snow");
+      }
        $main.show(500);
 
        clickNextQuestionPermitted = true; //give user right to answer
 }
+//change sum 
+function animateResult(number) {
+         // Create a jQuery object for the span element
+         var $span = $('#sum');
+
+         // Animate the text from 0 to the given number
+         $({ count: 0 }).animate({ count: number }, {
+            duration: number*250,
+            step: function() {
+               $span.text(Math.floor(this.count)+'/10');
+            },
+            complete: function() {
+               $span.text(number+'/10');
+            }
+         });
+  }
 
 //seconds countdown, controlled by questions's putter
 function counter() {
@@ -180,26 +199,20 @@ $(document).ready(function showDate(){
 
 
 //footer over main problem
-$(document).ready(updateFooter);
-$(window).resize(updateFooter);
+$(document).ready(
+function() {
+  if($main.position().top + $main.outerHeight() > $('body').outerHeight()){
+     $('body').css({'height':'120vh'});
+     $footer.css({'position':'absolute'});
+     $footer.css({'bottom':'-20vh'});
+  }
 
-function  updateFooter(){
-     console.log('window : '+$(window).height());
-     console.log('footer : '+($footer.position().top+$footer.height()));
-     console.log('----------------------------');
-    let statement = $(window).height() > $('body').height();
-    if (statement) {
-        $footer.css('position','relative');
-        $('body').css('overflow-y','visible')
-    } else {
-        $footer.css('position','absolute');
-        $footer.css('bottom','0');
-        $('body').css('overflow-y','hidden')
+  }
+  );
 
-    }
 
   // make the footer fixed to its position
-  }
+  
 //progress bar updater
 function update(){
        progress.width(parseInt(progressNumber.text())+10+'%');
@@ -213,7 +226,11 @@ function sendData() {
         $button.text('attendez ...');
       setTimeout(function() {location.reload();}, 3000);
     }else{
-  console.log('ok sending ...');
+        $button.text('attendez ...');
+  setTimeout(function() {alert('Votre résultat a été enregistré avec succès');}, 3000);
+          $button.text('quitter');
+
+
    /*var xhr = new XMLHttpRequest();
    xhr.open("POST", "save_result.php", true);
    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
@@ -230,7 +247,6 @@ function sendData() {
 
    const data = "id="+userId+"&subject="+subject+"&date="+passTime+"&note="+sum;
    xhr.send(data);*/
-   $button.text('shared succesfully');
    }
    };
 

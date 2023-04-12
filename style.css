@@ -8,11 +8,12 @@
    /*  --deeper  : #105a52;       /*rgb(    16,  90, 82  )*/
   
 
-     --bg      : #1A2E43;       /*rgb(   216, 214, 212 )*/
-     --beach   : #0096FF;       /*rgb(    35, 178, 167 )*/
-     --fire    : yellow;       /*rgb(   224,  94, 32  )*/
-     --correct : #33CC33;
-     --wrong   : #FF3300;
+     --bg            : #1A2E43;       /*rgb(   216, 214, 212 )*/
+     --beach         : #0096FF;       /*rgb(    35, 178, 167 )*/
+     --fire          : yellow;       /*rgb(   224,  94, 32  )*/
+     --correct       : #33CC33;
+     --wrong         : #FF3300;
+     --result-color  : var(--correct);
   }
 
 	body{
@@ -24,6 +25,7 @@
 		user-select: none;
        -webkit-user-select: none;
        -moz-user-select: none;
+       height: 100vh;
 	}
 
 	header{
@@ -61,9 +63,6 @@
     }
 
 
-
-   
-  
     section > p { 
        background-color: var(--beach);
        border: 4px solid black;
@@ -74,10 +73,6 @@
        overflow: hidden;
        transition: box-shadow .4s;
        justify-content: center !important;
-    }
-    
-       section > p:hover { 
-       box-shadow: 0 0 8px white;
     }
 
     section > p > span {
@@ -135,6 +130,8 @@ footer {
 	justify-content: space-between;
 	border: 2px solid black;
 	width: 100vw;
+    position: fixed;
+    bottom: 0;
 }
 footer > div:nth-child(2) {
     position: relative;
@@ -206,7 +203,77 @@ button:hover{
   100% { transform: translateY(0); }
 }
 
+@keyframes lightening{
+    0%,100%{box-shadow: 0; }
+    50%{  
+        box-shadow: 
+    0 0 10px 2px var(--result-color),
+    0 0 30px 8px var(--result-color),
+    0 0 60px 18px var(--result-color);
+}}
+/************/
 
+
+    .snowflake {
+            position: absolute;
+            font-size: 3em;
+            color: #fff;
+            text-shadow: 0 0 5px #000;
+            user-select: none;
+            pointer-events: none;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-100%);
+            }
+
+            100% {
+                transform: translateY(100vh);
+            }
+        }
+
+
+
+        /***********/
+        .snow{
+    background: url(https://i.postimg.cc/cLJ2vMtf/snow.png);
+    background-repeat: repeat;
+    animation: snow 6s linear infinite;
+}
+
+@keyframes snow{
+
+0%{
+ background-position: 50px 50px;
+}
+
+20%{
+ background-position: 100px 100px;
+}
+
+30%{
+ background-position: 150px 150px;
+}
+
+40%{
+ background-position: 200px 200px;
+}
+
+60%{
+ background-position: 250px 250px;
+}
+
+80%{
+ background-position: 300px 300px;
+}
+
+100%{
+ background-position: 350px 350px;
+}}
+
+/********/
    @keyframes succes{
     0%     { background-color: var(--correct);}
    50%     { background-color: var(--beach); }
