@@ -204,7 +204,7 @@ function() {
   if($main.position().top + $main.outerHeight() > $('body').outerHeight()){
      $('body').css({'height':'120vh'});
      $footer.css({'position':'absolute'});
-     $footer.css({'bottom':'-20vh'});
+     $footer.css({'bottom':-$('body').height() });
   }
 
   }
